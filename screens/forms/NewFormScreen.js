@@ -4,23 +4,41 @@ import {
   Text, 
   StyleSheet,
   ScrollView,
-  TextInput,
   TouchableOpacity,
   Alert,
   KeyboardAvoidingView,
   Platform 
 } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Ionicons } from '@expo/vector-icons';
+
+// Import components and utilities
+import FormField from '../../components/forms/FormField';
+import FormSection from '../../components/forms/FormSection';
+import { saveFormToStorage } from '../../utils/formUtils';
 
 /**
  * Screen for creating new assessment forms
  */
 const NewFormScreen = ({ navigation }) => {
   // Form state
-  const [formTitle, setFormTitle] = useState('');
-  const [location, setLocation] = useState('');
-  const [notes, setNotes] = useState('');
+  const [formData, setFormData] = useState({
+    title: '',
+    location: '',
+    notes: '',
+    date: new Date().toISOString().split('T')[0],
+    hasPhotos: false,
+    // We'll add more fields in future iterations
+  });
+  
+  /**
+   * Update a single form field
+   */
+  const updateField = (fieldName, value) => {
+    setFormData({
+      ...formData,
+      [fieldName]: value
+    });
+  };
   
   /**
    * Save the form data to AsyncStorage
@@ -28,26 +46,19 @@ const NewFormScreen = ({ navigation }) => {
   const saveForm = async () => {
     try {
       // Validate form data
-      if (!formTitle.trim()) {
+      if (!formData.title.trim()) {
         Alert.alert('Error', 'Please enter a form title');
         return;
       }
       
-      // Create form data object
-      const formData = {
-        title: formTitle.trim(),
-        location: location.trim(),
-        notes: notes.trim(),
+      // Add metadata before saving
+      const formToSave = {
+        ...formData,
         createdAt: new Date().toISOString(),
-        // We'll add dynamic fields system in the next iteration
-        fields: []
       };
       
-      // Generate unique ID for the form
-      const formId = `form_${Date.now()}`;
-      
-      // Save to AsyncStorage
-      await AsyncStorage.setItem(formId, JSON.stringify(formData));
+      // Save using our utility function
+      const formId = await saveFormToStorage(formToSave);
       
       // Show success message
       Alert.alert(
@@ -57,10 +68,14 @@ const NewFormScreen = ({ navigation }) => {
           { 
             text: 'OK', 
             onPress: () => {
-              // Reset form fields
-              setFormTitle('');
-              setLocation('');
-              setNotes('');
+              // Reset form data
+              setFormData({
+                title: '',
+                location: '',
+                notes: '',
+                date: new Date().toISOString().split('T')[0],
+                hasPhotos: false,
+              });
               
               // In future iterations, we'll navigate to the saved forms screen
               // navigation.navigate('SavedForms');
@@ -87,9 +102,13 @@ const NewFormScreen = ({ navigation }) => {
           text: 'Clear', 
           style: 'destructive',
           onPress: () => {
-            setFormTitle('');
-            setLocation('');
-            setNotes('');
+            setFormData({
+              title: '',
+              location: '',
+              notes: '',
+              date: new Date().toISOString().split('T')[0],
+              hasPhotos: false,
+            });
           }
         }
       ]
@@ -109,41 +128,66 @@ const NewFormScreen = ({ navigation }) => {
             <Text style={styles.headerText}>New Field Assessment</Text>
           </View>
           
-          {/* Basic form fields */}
-          <Text style={styles.label}>Assessment Title *</Text>
-          <TextInput
-            style={styles.input}
-            value={formTitle}
-            onChangeText={setFormTitle}
-            placeholder="Enter assessment title"
-          />
+          {/* Basic form information section */}
+          <FormSection 
+            title="Basic Information" 
+            icon="information-circle-outline"
+          >
+            <FormField
+              label="Assessment Title"
+              value={formData.title}
+              onChange={(value) => updateField('title', value)}
+              placeholder="Enter assessment title"
+              required
+            />
+            
+            <FormField
+              label="Location"
+              value={formData.location}
+              onChange={(value) => updateField('location', value)}
+              placeholder="Enter assessment location"
+            />
+            
+            <FormField
+              label="Date"
+              value={formData.date}
+              onChange={(value) => updateField('date', value)}
+              placeholder="YYYY-MM-DD"
+            />
+            
+            <FormField
+              type="toggle"
+              label="Include Photos"
+              value={formData.hasPhotos}
+              onChange={(value) => updateField('hasPhotos', value)}
+            />
+          </FormSection>
           
-          <Text style={styles.label}>Location</Text>
-          <TextInput
-            style={styles.input}
-            value={location}
-            onChangeText={setLocation}
-            placeholder="Enter location"
-          />
-          
-          <Text style={styles.label}>Notes</Text>
-          <TextInput
-            style={[styles.input, styles.textArea]}
-            value={notes}
-            onChangeText={setNotes}
-            placeholder="Enter any additional notes"
-            multiline
-            numberOfLines={4}
-            textAlignVertical="top"
-          />
+          {/* Notes section */}
+          <FormSection 
+            title="Notes" 
+            icon="document-text-outline"
+          >
+            <FormField
+              type="textarea"
+              label="Notes"
+              value={formData.notes}
+              onChange={(value) => updateField('notes', value)}
+              placeholder="Enter any additional notes or observations"
+            />
+          </FormSection>
           
           {/* Future iterations will have dynamic form fields here */}
-          <Text style={styles.sectionTitle}>Field Data</Text>
-          <Text style={styles.infoText}>
-            In future versions, this section will contain dynamic form fields for capturing
-            forest assessment data such as species information, health indicators, and 
-            measurement data.
-          </Text>
+          <FormSection 
+            title="Assessment Data" 
+            icon="leaf-outline"
+          >
+            <Text style={styles.infoText}>
+              In future versions, this section will contain dynamic form fields for capturing
+              forest assessment data such as species information, health indicators, and 
+              measurement data.
+            </Text>
+          </FormSection>
           
           {/* Form actions */}
           <View style={styles.buttonContainer}>
@@ -186,39 +230,16 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: '#2E7D32',
   },
-  label: {
-    fontSize: 16,
-    marginBottom: 5,
-    fontWeight: '500',
-  },
-  input: {
-    backgroundColor: 'white',
-    borderRadius: 5,
-    padding: 12,
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: '#ddd',
-  },
-  textArea: {
-    height: 100,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginTop: 10,
-    marginBottom: 10,
-  },
   infoText: {
     color: '#666',
     fontSize: 14,
     lineHeight: 20,
-    marginBottom: 20,
     fontStyle: 'italic',
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 20,
+    marginTop: 30,
   },
   button: {
     borderRadius: 5,
