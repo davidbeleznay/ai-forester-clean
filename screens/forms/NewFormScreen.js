@@ -66,7 +66,7 @@ const NewFormScreen = ({ navigation }) => {
         'Assessment saved successfully!',
         [
           { 
-            text: 'OK', 
+            text: 'View All Assessments', 
             onPress: () => {
               // Reset form data
               setFormData({
@@ -77,8 +77,21 @@ const NewFormScreen = ({ navigation }) => {
                 hasPhotos: false,
               });
               
-              // In future iterations, we'll navigate to the saved forms screen
-              // navigation.navigate('SavedForms');
+              // Navigate to saved forms
+              navigation.navigate('SavedForms');
+            }
+          },
+          {
+            text: 'Create Another',
+            onPress: () => {
+              // Reset form data
+              setFormData({
+                title: '',
+                location: '',
+                notes: '',
+                date: new Date().toISOString().split('T')[0],
+                hasPhotos: false,
+              });
             }
           }
         ]
