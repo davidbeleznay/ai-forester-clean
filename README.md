@@ -23,8 +23,7 @@ The AI Forester App is designed to help forest professionals collect data in the
 ### Prerequisites
 
 - Node.js (v14+)
-- Expo CLI (`npm install -g expo-cli`)
-- Expo Go app on your mobile device
+- npm or yarn
 
 ### Installation
 
@@ -39,12 +38,23 @@ The AI Forester App is designed to help forest professionals collect data in the
    npm install
    ```
 
-3. Start the development server:
+3. Fix vulnerabilities (if needed):
    ```
-   expo start
+   npm audit fix --force
    ```
 
-4. Scan the QR code with Expo Go app on your mobile device.
+4. Start the development server:
+   ```
+   npx expo start --clear
+   ```
+   
+   Note: If you prefer to install Expo CLI globally:
+   ```
+   npm install -g expo-cli
+   expo start --clear
+   ```
+
+5. Scan the QR code with Expo Go app on your mobile device.
 
 ## Project Structure
 
@@ -53,6 +63,7 @@ ai-forester-clean/
 ├── assets/                # Images, fonts, etc.
 ├── components/            # Reusable UI components
 │   └── forms/             # Form-related components
+├── config/                # Configuration files
 ├── navigation/            # Navigation configuration
 ├── screens/               # App screens
 │   └── forms/             # Form-related screens
@@ -68,7 +79,23 @@ ai-forester-clean/
 - Local storage of assessments
 - Form viewing and management
 
+## Troubleshooting
+
+### Common Issues:
+
+1. **"expo command not found"**: Use `npx expo start` instead, or install Expo CLI globally with `npm install -g expo-cli`
+
+2. **Dependency vulnerabilities**: Run `npm audit fix --force` to address vulnerabilities
+
+3. **Metro bundler issues**: Clear the cache with `npx expo start --clear`
+
+4. **Bundling errors**: Make sure to check the Metro bundler console output for errors
+
 ## Changelog
+
+### 2025-04-30
+- FIXED: Added comprehensive setup instructions and troubleshooting
+- ADDED: Guidelines for addressing vulnerabilities
 
 ### 2025-04-29
 - CREATED: Initial project setup with clean architecture
