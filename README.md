@@ -75,9 +75,25 @@ ai-forester-clean/
 
 ## Features
 
-- Dynamic form fields system
-- Local storage of assessments
-- Form viewing and management
+- **Dynamic Form System**: Create customizable field assessment forms
+- **Local Storage**: Save and manage forms on the device using AsyncStorage
+- **Form Viewing**: View detailed form information
+- **Form Management**: Create, view, and delete forms
+
+## Working with the App
+
+1. **Creating a New Assessment**:
+   - Navigate to the "New Assessment" tab
+   - Enter the required information
+   - Click "Save Assessment"
+
+2. **Viewing Saved Assessments**:
+   - Navigate to the "Saved Assessments" tab
+   - Tap on an assessment to view details
+
+3. **Deleting an Assessment**:
+   - From the Saved Assessments list, tap the trash icon on an assessment
+   - Or open an assessment and use the delete button
 
 ## Troubleshooting
 
@@ -94,8 +110,11 @@ ai-forester-clean/
 ## Changelog
 
 ### 2025-04-30
-- FIXED: Added comprehensive setup instructions and troubleshooting
-- ADDED: Guidelines for addressing vulnerabilities
+- ADDED: ViewFormScreen for viewing saved form details
+- ADDED: SavedFormsScreen for managing saved forms
+- UPDATED: Navigation system to handle all screens
+- FIXED: Updated package.json with latest dependencies
+- IMPROVED: Form handling with proper AsyncStorage functions
 
 ### 2025-04-29
 - CREATED: Initial project setup with clean architecture
