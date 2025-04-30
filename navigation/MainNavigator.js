@@ -7,7 +7,6 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import NewFormScreen from '../screens/forms/NewFormScreen';
 import SavedFormsScreen from '../screens/forms/SavedFormsScreen';
-import ViewFormScreen from '../screens/forms/ViewFormScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -61,11 +60,14 @@ const MainNavigator = () => {
         component={TabNavigator} 
         options={{ headerShown: false }}
       />
-      <Stack.Screen
-        name="ViewForm"
-        component={ViewFormScreen}
-        options={{ title: 'View Assessment' }}
-      />
+      {/* 
+        Additional screens can be added here, for example:
+        <Stack.Screen
+          name="ViewForm"
+          component={ViewFormScreen}
+          options={{ title: 'Assessment Details' }}
+        />
+      */}
     </Stack.Navigator>
   );
 }
