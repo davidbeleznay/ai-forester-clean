@@ -51,7 +51,11 @@ const SavedFormsScreen = ({ navigation }) => {
    * View a specific form
    */
   const viewForm = (form) => {
-    navigation.navigate('ViewForm', { formId: form.id });
+    // We'll implement the view form screen in a future update
+    Alert.alert('Coming Soon', 'View form functionality will be added in the next update');
+
+    // In the future, we'll navigate to the ViewFormScreen
+    // navigation.navigate('ViewForm', { formId: form.id });
   };
 
   /**
@@ -101,7 +105,7 @@ const SavedFormsScreen = ({ navigation }) => {
           {/* Show location if available */}
           {item.location && (
             <View style={styles.locationContainer}>
-              <Ionicons name="location-outline" size={14} color="#666" />
+              <Ionicons name="location-outline" size={16} color="#666" />
               <Text style={styles.locationText}>{item.location}</Text>
             </View>
           )}
@@ -111,54 +115,40 @@ const SavedFormsScreen = ({ navigation }) => {
           style={styles.deleteButton}
           onPress={() => confirmDeleteForm(item)}
         >
-          <Ionicons name="trash-outline" size={22} color="#ff4444" />
+          <Ionicons name="trash-outline" size={24} color="#e74c3c" />
         </TouchableOpacity>
       </TouchableOpacity>
     );
   };
 
   /**
-   * Render empty state when no forms exist
+   * Render empty state when no forms are available
    */
-  const renderEmptyState = () => {
-    if (loading) {
-      return (
-        <View style={styles.emptyContainer}>
-          <ActivityIndicator size="large" color="#2E7D32" />
-          <Text style={styles.emptyText}>Loading saved assessments...</Text>
-        </View>
-      );
-    }
-    
-    return (
-      <View style={styles.emptyContainer}>
-        <Ionicons name="document-text-outline" size={64} color="#ccc" />
-        <Text style={styles.emptyText}>No saved assessments</Text>
-        <Text style={styles.emptySubtext}>
-          Assessments you save will appear here
-        </Text>
-        <TouchableOpacity
-          style={styles.createButton}
-          onPress={() => navigation.navigate('NewForm')}
-        >
-          <Text style={styles.createButtonText}>Create New Assessment</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
+  const renderEmptyComponent = () => (
+    <View style={styles.emptyContainer}>
+      <Ionicons name="document-outline" size={64} color="#ccc" />
+      <Text style={styles.emptyTitle}>No Saved Assessments</Text>
+      <Text style={styles.emptySubtitle}>
+        Your saved assessments will appear here
+      </Text>
+    </View>
+  );
 
   return (
     <View style={styles.container}>
-      {forms.length > 0 ? (
+      {loading ? (
+        <View style={styles.loadingContainer}>
+          <ActivityIndicator size="large" color="#2E7D32" />
+          <Text style={styles.loadingText}>Loading saved assessments...</Text>
+        </View>
+      ) : (
         <FlatList
           data={forms}
           renderItem={renderFormItem}
-          keyExtractor={(item) => item.id}
+          keyExtractor={item => item.id}
           contentContainerStyle={styles.listContainer}
-          showsVerticalScrollIndicator={false}
+          ListEmptyComponent={renderEmptyComponent}
         />
-      ) : (
-        renderEmptyState()
       )}
     </View>
   );
@@ -169,8 +159,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  loadingText: {
+    marginTop: 10,
+    fontSize: 16,
+    color: '#666',
+  },
   listContainer: {
     padding: 16,
+    flexGrow: 1,
   },
   formItem: {
     backgroundColor: 'white',
@@ -178,6 +180,7 @@ const styles = StyleSheet.create({
     padding: 16,
     marginBottom: 12,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -191,13 +194,13 @@ const styles = StyleSheet.create({
   formTitle: {
     fontSize: 16,
     fontWeight: '600',
-    marginBottom: 4,
     color: '#333',
+    marginBottom: 4,
   },
   formDate: {
     fontSize: 14,
     color: '#666',
-    marginBottom: 4,
+    marginBottom: 8,
   },
   locationContainer: {
     flexDirection: 'row',
@@ -216,30 +219,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    minHeight: 300,
   },
-  emptyText: {
+  emptyTitle: {
     fontSize: 18,
     fontWeight: '600',
-    marginTop: 16,
     color: '#333',
+    marginTop: 16,
   },
-  emptySubtext: {
+  emptySubtitle: {
     fontSize: 14,
     color: '#666',
     marginTop: 8,
     textAlign: 'center',
-    marginBottom: 24,
-  },
-  createButton: {
-    backgroundColor: '#2E7D32',
-    paddingVertical: 12,
-    paddingHorizontal: 20,
-    borderRadius: 8,
-  },
-  createButtonText: {
-    color: 'white',
-    fontWeight: '600',
-    fontSize: 16,
   },
 });
 
