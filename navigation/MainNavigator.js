@@ -6,8 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 // Import screens
 import HomeScreen from '../screens/HomeScreen';
 import NewFormScreen from '../screens/forms/NewFormScreen';
-// We'll add SavedFormsScreen later to ensure it works correctly
-// import SavedFormsScreen from '../screens/forms/SavedFormsScreen';
+import SavedFormsScreen from '../screens/forms/SavedFormsScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,6 +22,8 @@ const TabNavigator = () => {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'NewForm') {
             iconName = focused ? 'add-circle' : 'add-circle-outline';
+          } else if (route.name === 'SavedForms') {
+            iconName = focused ? 'folder' : 'folder-outline';
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
@@ -41,6 +42,11 @@ const TabNavigator = () => {
         component={NewFormScreen} 
         options={{ title: 'New Assessment' }}
       />
+      <Tab.Screen 
+        name="SavedForms" 
+        component={SavedFormsScreen} 
+        options={{ title: 'Saved Assessments' }}
+      />
     </Tab.Navigator>
   );
 }
@@ -55,11 +61,11 @@ const MainNavigator = () => {
         options={{ headerShown: false }}
       />
       {/* 
-      We'll add these screens incrementally to ensure everything works properly
+      Add additional screens here:
       <Stack.Screen
-        name="SavedForms"
-        component={SavedFormsScreen}
-        options={{ title: 'Saved Assessments' }}
+        name="ViewForm"
+        component={ViewFormScreen}
+        options={{ title: 'View Assessment' }}
       />
       */}
     </Stack.Navigator>
