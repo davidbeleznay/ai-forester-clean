@@ -23,7 +23,10 @@ The AI Forester App is designed to help forest professionals collect data in the
 ### Prerequisites
 
 - Node.js (v14+)
-- npm or yarn
+- Expo CLI
+  - Install with: `npm install -g expo-cli`
+  - If you don't want to install globally, use: `npx expo start`
+- Expo Go app on your mobile device
 
 ### Installation
 
@@ -38,23 +41,12 @@ The AI Forester App is designed to help forest professionals collect data in the
    npm install
    ```
 
-3. Fix vulnerabilities (if needed):
-   ```
-   npm audit fix --force
-   ```
-
-4. Start the development server:
+3. Start the development server:
    ```
    npx expo start --clear
    ```
-   
-   Note: If you prefer to install Expo CLI globally:
-   ```
-   npm install -g expo-cli
-   expo start --clear
-   ```
 
-5. Scan the QR code with Expo Go app on your mobile device.
+4. Scan the QR code with Expo Go app on your mobile device.
 
 ## Project Structure
 
@@ -63,63 +55,54 @@ ai-forester-clean/
 ├── assets/                # Images, fonts, etc.
 ├── components/            # Reusable UI components
 │   └── forms/             # Form-related components
-├── config/                # Configuration files
 ├── navigation/            # Navigation configuration
 ├── screens/               # App screens
 │   └── forms/             # Form-related screens
 ├── utils/                 # Utility functions
+├── config/                # Configuration files
 ├── App.js                 # App entry point
 ├── app.json               # Expo configuration
+├── metro.config.js        # Metro bundler configuration
 └── package.json           # Project dependencies
 ```
 
 ## Features
 
-- **Dynamic Form System**: Create customizable field assessment forms
-- **Local Storage**: Save and manage forms on the device using AsyncStorage
-- **Form Viewing**: View detailed form information
-- **Form Management**: Create, view, and delete forms
+### Implemented
+- Basic navigation structure with tabs
+- Home screen with app information
+- New Assessment form with basic fields
+- Saved assessments screen with list view
+- Form deletion functionality
+- Local storage using AsyncStorage
 
-## Working with the App
-
-1. **Creating a New Assessment**:
-   - Navigate to the "New Assessment" tab
-   - Enter the required information
-   - Click "Save Assessment"
-
-2. **Viewing Saved Assessments**:
-   - Navigate to the "Saved Assessments" tab
-   - Tap on an assessment to view details
-
-3. **Deleting an Assessment**:
-   - From the Saved Assessments list, tap the trash icon on an assessment
-   - Or open an assessment and use the delete button
-
-## Troubleshooting
-
-### Common Issues:
-
-1. **"expo command not found"**: Use `npx expo start` instead, or install Expo CLI globally with `npm install -g expo-cli`
-
-2. **Dependency vulnerabilities**: Run `npm audit fix --force` to address vulnerabilities
-
-3. **Metro bundler issues**: Clear the cache with `npx expo start --clear`
-
-4. **Bundling errors**: Make sure to check the Metro bundler console output for errors
+### Planned
+- Dynamic form fields system
+- Form templates for different assessment types
+- Photo capture and management
+- Location tracking
+- Data export capabilities
 
 ## Changelog
 
 ### 2025-04-30
-- ADDED: ViewFormScreen for viewing saved form details
-- ADDED: SavedFormsScreen for managing saved forms
-- UPDATED: Navigation system to handle all screens
-- FIXED: Updated package.json with latest dependencies
-- IMPROVED: Form handling with proper AsyncStorage functions
+- REBUILT: Created new clean project structure to resolve bundling issues
+- ADDED: SavedFormsScreen with simplified architecture
+- FIXED: Asset resolution and bundling problems
+- IMPLEMENTED: Navigation between all screens
 
 ### 2025-04-29
-- CREATED: Initial project setup with clean architecture
-- ADDED: Basic navigation structure
-- IMPLEMENTED: Project documentation
+- CREATED: Initial project with basic form functionality
+- ADDED: Form components with basic fields (text, toggle, textarea)
+- IMPLEMENTED: Form data storage using AsyncStorage
+
+## Troubleshooting
+
+If you encounter bundling issues:
+
+1. Make sure to use `expo start --clear` to clear the Metro bundler cache
+2. Check metro.config.js if you need to exclude problematic files
+3. Ensure all assets (icon.png, splash.png, etc.) exist in the assets folder
 
 ## License
 
