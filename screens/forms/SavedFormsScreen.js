@@ -51,11 +51,7 @@ const SavedFormsScreen = ({ navigation }) => {
    * View a specific form
    */
   const viewForm = (form) => {
-    // We'll implement the view form screen in the next iteration
-    Alert.alert('Coming Soon', 'View form functionality will be added in the next update');
-
-    // In the future, we'll navigate to the ViewFormScreen
-    // navigation.navigate('ViewForm', { formId: form.id });
+    navigation.navigate('ViewForm', { formId: form.id });
   };
 
   /**
