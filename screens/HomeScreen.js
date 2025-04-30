@@ -22,8 +22,7 @@ const HomeScreen = ({ navigation }) => {
         
         <TouchableOpacity 
           style={styles.actionButton}
-          // We'll enable this once we've added the SavedForms screen
-          onPress={() => alert('Coming soon! Saved forms feature under development.')}
+          onPress={() => navigation.navigate('SavedForms')}
         >
           <Ionicons name="folder" size={32} color="#2E7D32" />
           <Text style={styles.actionText}>Saved Assessments</Text>
