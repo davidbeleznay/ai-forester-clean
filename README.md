@@ -79,7 +79,10 @@ ai-forester-clean/
 - Saved assessments screen with list view
 - Form deletion functionality
 - Local storage using AsyncStorage
-- Basic Culvert Sizing Tool interface with location capture
+- Basic Culvert Sizing Tool interface with:
+  - Location capture using device GPS
+  - Multiple stream width measurements
+  - Optional transport and climate consideration toggles
 
 ### Planned
 - Dynamic form fields system
@@ -93,6 +96,9 @@ ai-forester-clean/
 ## Changelog
 
 ### 2025-05-09
+- ADDED: Multiple stream width measurements with add/remove functionality
+- IMPLEMENTED: Optional transport and climate consideration toggles
+- ENHANCED: Culvert Tool form organization with improved section layout
 - ADDED: Culvert Sizing Tool with basic input screen
 - IMPLEMENTED: GPS location capture for culvert assessments
 - CREATED: Navigation structure for Culvert Tool
