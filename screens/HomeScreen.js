@@ -27,6 +27,14 @@ const HomeScreen = ({ navigation }) => {
           <Ionicons name="folder" size={32} color="#2E7D32" />
           <Text style={styles.actionText}>Saved Assessments</Text>
         </TouchableOpacity>
+        
+        <TouchableOpacity 
+          style={styles.actionButton}
+          onPress={() => navigation.navigate('CulvertTool')}
+        >
+          <Ionicons name="water" size={32} color="#2E7D32" />
+          <Text style={styles.actionText}>Culvert Sizing Tool</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.infoContainer}>
