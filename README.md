@@ -79,10 +79,16 @@ ai-forester-clean/
 - Saved assessments screen with list view
 - Form deletion functionality
 - Local storage using AsyncStorage
-- Basic Culvert Sizing Tool interface with:
+- Culvert Sizing Tool interface with:
   - Location capture using device GPS
-  - Multiple stream width measurements
+  - Core required inputs based on specification:
+    - Multiple top (W1) and bottom (W2) width measurements with averaging
+    - Bankfull depth (D) input
+    - Stream slope (S) input
+    - Drainage area (A) input with switchable units (ha/km²)
+    - Region value (fixed at 3.0)
   - Optional transport and climate consideration toggles
+  - Detailed field descriptions matching standards
 
 ### Planned
 - Dynamic form fields system
@@ -96,6 +102,11 @@ ai-forester-clean/
 ## Changelog
 
 ### 2025-05-09
+- ADDED: Core required inputs based on specification table
+- IMPLEMENTED: Top and bottom width collection with real-time averaging
+- ADDED: Bankfull depth, stream slope, and drainage area input fields
+- ENHANCED: Form field descriptions with proper formatting guidelines
+- ADDED: Toggleable drainage area units (ha/km²)
 - ADDED: Multiple stream width measurements with add/remove functionality
 - IMPLEMENTED: Optional transport and climate consideration toggles
 - ENHANCED: Culvert Tool form organization with improved section layout
