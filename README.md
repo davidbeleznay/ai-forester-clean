@@ -10,6 +10,7 @@ The AI Forester App is designed to help forest professionals collect data in the
 - Save assessments locally
 - View and manage saved assessments
 - Export assessment data
+- Size culverts for forest roads
 
 ## Technologies
 
@@ -56,8 +57,11 @@ ai-forester-clean/
 ├── components/            # Reusable UI components
 │   └── forms/             # Form-related components
 ├── navigation/            # Navigation configuration
+│   ├── MainNavigator.js   # Main app navigation
+│   └── CulvertToolNavigator.js # Culvert tool navigation
 ├── screens/               # App screens
-│   └── forms/             # Form-related screens
+│   ├── forms/             # Form-related screens
+│   └── culvert/           # Culvert tool screens
 ├── utils/                 # Utility functions
 ├── config/                # Configuration files
 ├── App.js                 # App entry point
@@ -75,6 +79,7 @@ ai-forester-clean/
 - Saved assessments screen with list view
 - Form deletion functionality
 - Local storage using AsyncStorage
+- Basic Culvert Sizing Tool interface with location capture
 
 ### Planned
 - Dynamic form fields system
@@ -82,8 +87,16 @@ ai-forester-clean/
 - Photo capture and management
 - Location tracking
 - Data export capabilities
+- Culvert sizing calculations
+- Visual culvert size representation
 
 ## Changelog
+
+### 2025-05-09
+- ADDED: Culvert Sizing Tool with basic input screen
+- IMPLEMENTED: GPS location capture for culvert assessments
+- CREATED: Navigation structure for Culvert Tool
+- UPDATED: HomeScreen with Culvert Tool access button
 
 ### 2025-04-30
 - REBUILT: Created new clean project structure to resolve bundling issues
