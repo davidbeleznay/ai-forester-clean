@@ -8,6 +8,9 @@ import HomeScreen from '../screens/HomeScreen';
 import NewFormScreen from '../screens/forms/NewFormScreen';
 import SavedFormsScreen from '../screens/forms/SavedFormsScreen';
 
+// Import navigators
+import CulvertToolNavigator from './CulvertToolNavigator';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -58,6 +61,12 @@ const MainNavigator = () => {
       <Stack.Screen 
         name="Main" 
         component={TabNavigator} 
+        options={{ headerShown: false }}
+      />
+      {/* Culvert Tool Navigator */}
+      <Stack.Screen
+        name="CulvertTool"
+        component={CulvertToolNavigator}
         options={{ headerShown: false }}
       />
       {/* 
