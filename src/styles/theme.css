@@ -1,0 +1,66 @@
+/* src/styles/theme.css */
+:root {
+  --color-primary: #2374E1;
+  --color-secondary: #36833E;
+  --color-tertiary: #6E34B8;
+  --color-background: #f8f9fa;
+  --color-card: #ffffff;
+  --color-text-dark: #333333;
+  --color-text-medium: #555555;
+  --color-text-light: #888888;
+  --color-border: #e0e0e0;
+  --color-success: #28a745;
+  --color-warning: #ffc107;
+  --color-error: #dc3545;
+  --shadow-small: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme {
+  --color-primary: #4A90E2;
+  --color-secondary: #4CA456;
+  --color-tertiary: #9356DC;
+  --color-background: #121212;
+  --color-card: #1e1e1e;
+  --color-text-dark: #e0e0e0;
+  --color-text-medium: #cccccc;
+  --color-text-light: #a0a0a0;
+  --color-border: #333333;
+  --shadow-small: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Apply transitions for smooth theme switching */
+body, .card, .menu-item, .draft-card, input, select, textarea, button {
+  transition: 
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* General theme-aware styles */
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-dark);
+}
+
+.card {
+  background-color: var(--color-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-small);
+}
+
+/* Form elements in dark mode */
+body.dark-theme input,
+body.dark-theme select,
+body.dark-theme textarea {
+  background-color: #2a2a2a;
+  color: var(--color-text-dark);
+  border-color: #444;
+}
+
+body.dark-theme input::placeholder,
+body.dark-theme textarea::placeholder {
+  color: var(--color-text-light);
+}
