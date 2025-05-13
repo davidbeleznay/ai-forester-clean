@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
@@ -11,11 +11,16 @@ import SavedFormsScreen from '../screens/forms/SavedFormsScreen';
 // Import navigators
 import CulvertToolNavigator from './CulvertToolNavigator';
 
+// Import ThemeContext
+import { ThemeContext } from '../src/context/ThemeContext';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 // Bottom tab navigator
 const TabNavigator = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+  
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -30,15 +35,25 @@ const TabNavigator = () => {
           }
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: '#2E7D32',
-        tabBarInactiveTintColor: 'gray',
+        tabBarActiveTintColor: isDarkMode ? '#4A90E2' : '#2374E1',
+        tabBarInactiveTintColor: isDarkMode ? '#888888' : 'gray',
+        tabBarStyle: {
+          backgroundColor: isDarkMode ? '#1e1e1e' : '#ffffff',
+          borderTopColor: isDarkMode ? '#333333' : '#e0e0e0',
+        },
+        headerStyle: {
+          backgroundColor: isDarkMode ? '#1e1e1e' : '#ffffff',
+          borderBottomColor: isDarkMode ? '#333333' : '#e0e0e0',
+          borderBottomWidth: 1,
+        },
+        headerTintColor: isDarkMode ? '#e0e0e0' : '#333333',
         headerShown: true,
       })}
     >
       <Tab.Screen 
         name="Home" 
         component={HomeScreen} 
-        options={{ title: 'AI Forester' }}
+        options={{ title: 'Digital Forester' }}
       />
       <Tab.Screen 
         name="NewForm" 
