@@ -62,6 +62,10 @@ ai-forester-clean/
 ├── screens/               # App screens
 │   ├── forms/             # Form-related screens
 │   └── culvert/           # Culvert tool screens
+├── src/                   # Source files
+│   ├── components/        # Common components
+│   ├── context/           # React context providers
+│   └── styles/            # Global styles
 ├── utils/                 # Utility functions
 ├── config/                # Configuration files
 ├── App.js                 # App entry point
@@ -73,6 +77,10 @@ ai-forester-clean/
 ## Features
 
 ### Implemented
+- **UI/UX Enhancements**:
+  - Dark mode support with theme toggle
+  - Improved visual design with modern card-based layout
+  - Recent drafts section on home screen
 - Basic navigation structure with tabs
 - Home screen with app information
 - New Assessment form with basic fields
@@ -100,6 +108,14 @@ ai-forester-clean/
 - Visual culvert size representation
 
 ## Changelog
+
+### 2025-05-13
+- ADDED: Dark mode support with theme toggle button
+- REDESIGNED: HomeScreen with modern UI/UX
+- ADDED: Recent Drafts section to HomeScreen
+- IMPLEMENTED: ThemeContext provider for app-wide theme state
+- ENHANCED: Updated navigation components to support dark mode
+- IMPROVED: Color scheme for better visual hierarchy
 
 ### 2025-05-09
 - ADDED: Core required inputs based on specification table
