@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Import culvert tool screens
@@ -6,15 +6,20 @@ import InputScreen from '../screens/culvert/InputScreen';
 // Import additional screens as they are created
 // import ResultScreen from '../screens/culvert/ResultScreen';
 
+// Import ThemeContext
+import { ThemeContext } from '../src/context/ThemeContext';
+
 const CulvertStack = createStackNavigator();
 
 const CulvertToolNavigator = () => {
+  const { isDarkMode } = useContext(ThemeContext);
+  
   return (
     <CulvertStack.Navigator
       initialRouteName="InputScreen"
       screenOptions={{
         headerStyle: {
-          backgroundColor: '#2E7D32',
+          backgroundColor: isDarkMode ? '#1e1e1e' : '#36833E',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
